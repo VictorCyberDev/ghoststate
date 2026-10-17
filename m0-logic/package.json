@@ -1,0 +1,10 @@
+{
+  "name": "ghoststate-m0-logic",
+  "private": true,
+  "type": "module",
+  "description": "Pure restore/alignment logic for the GhostState M0 proof. No Lens Studio APIs; test-only harness.",
+  "scripts": {
+    "test": "node --test \"test/*.test.ts\"",
+    "typecheck": "npx -y -p typescript@5 tsc --noEmit -p tsconfig.json"
+  }
+}

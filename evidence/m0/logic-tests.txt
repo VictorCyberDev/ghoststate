@@ -1,0 +1,23 @@
+# GhostState M0 pure-logic tests (Node v22.22.0), captured 2026-10-17T03:09:25Z
+# command: cd m0-logic && npm test
+ok 1 - disturbance is deterministic and every item is beyond NEAR
+ok 2 - save captures all 3 transforms; state flow IDLE->SAVED->DIVERGED
+ok 3 - restore renders exactly 3 ghosts
+ok 4 - restore is refused unless DIVERGED
+ok 5 - FAR stays unresolved
+ok 6 - entering <4 cm causes ALIGNED; exactly 4 cm does not
+ok 7 - 4-6 cm after entering does not flicker; >6 cm leaves
+ok 8 - jitter across the band produces exactly one transition (no boundary flicker)
+ok 9 - 0/3, 1/3, 2/3 never restored; 3/3 restored exactly once
+ok 10 - resolution is latched: an aligned item dragged out to 7 cm stays resolved
+ok 11 - cancel clears ghosts/progress, returns to DIVERGED, fires no completion; retry is clean
+ok 12 - save and simulateChange are refused mid-restore
+ok 13 - invariant: state RESTORED iff resolvedCount === 3, across a sweep of subsets
+# tests 13
+# pass 13
+# fail 0
+
+# mutation checks (source temporarily altered, then restored byte-identical):
+#  LEAVE_ALIGNED_M 0.06->0.04  => tests 7,8 FAIL (hysteresis is actually asserted)
+#  complete at >=2 resolved    => tests 9,11,13 FAIL (2/3 invariant is actually asserted)
+# typecheck: tsc 5.x --noEmit strict => exit 0
